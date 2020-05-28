@@ -23,6 +23,45 @@ android {
         }
     }
 
+    // Specifies two flavor dimensions.
+    flavorDimensions "myswift"
+    productFlavors {
+        production {
+            dimension "myswift"
+            buildConfigField "String", "SWIFT_SERVER", "\"https://api-football-v1.p.rapidapi.com/\""
+            buildConfigField "String", "SWIFT_API_KEY", "\"63284ca007msh15dbd714e326824p1120e4jsn99bdcaf89bea\""
+            buildConfigField "String", "SWIFT_API_HOST", "\"api-football-v1.p.rapidapi.com\""
+            buildConfigField "Integer", "CONNECT_TIMEOUT", "120"
+            buildConfigField "Integer", "WRITE_TIMEOUT", "120"
+            buildConfigField "Integer", "READ_TIMEOUT", "120"
+            buildConfigField "boolean", "IS_DEV", "false"
+        }
+
+        staging {
+            dimension "myswift"
+            buildConfigField "String", "SWIFT_SERVER", "\"https://api-football-v1.p.rapidapi.com/\""
+            buildConfigField "String", "SWIFT_API_KEY", "\"63284ca007msh15dbd714e326824p1120e4jsn99bdcaf89bea\""
+            buildConfigField "String", "SWIFT_API_HOST", "\"api-football-v1.p.rapidapi.com\""
+            buildConfigField "Integer", "CONNECT_TIMEOUT", "60"
+            buildConfigField "Integer", "WRITE_TIMEOUT", "60"
+            buildConfigField "Integer", "READ_TIMEOUT", "60"
+            buildConfigField "boolean", "IS_DEV", "true"
+            applicationIdSuffix ".staging"
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def project = "SwiftCode"
+            def SEP = "_"
+            def flavor = variant.productFlavors[0].name
+            def buildType = variant.variantData.variantConfiguration.buildType.name
+            def version = variant.versionCode
+            def newApkName = project + SEP + flavor + SEP + buildType + SEP + "V" + version + ".apk"
+            outputFileName = new File(newApkName)
+        }
+    }
+
 }
 
 dependencies {
@@ -34,4 +73,22 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // -- GSON -- //
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    // -- RX -- //
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
+
+    // -- RX BINDINGS -- //
+    implementation 'com.jakewharton.rxbinding3:rxbinding:3.0.0'
+
+    // -- RETROFIT -- //
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+
+    // -- OKHTTP -- //
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
 }
