@@ -1,0 +1,2 @@
+rootProject.name='MySwiftTestCode'
+include ':app'
