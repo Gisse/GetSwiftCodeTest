@@ -5,15 +5,15 @@ import com.google.gson.annotations.SerializedName
 
 data class Away(
     @SerializedName("draw")
-    val draw: Int,
+    val drawAway: Int?,
     @SerializedName("goalsAgainst")
-    val goalsAgainst: Int,
+    val goalsAgainstAway: Int?,
     @SerializedName("goalsFor")
-    val goalsFor: Int,
+    val goalsForAway: Int?,
     @SerializedName("lose")
-    val lose: Int,
+    val loseAway: Int?,
     @SerializedName("matchsPlayed")
-    val matchsPlayed: Int,
+    val matchsPlayedAway: Int?,
     @SerializedName("win")
-    val win: Int
+    val winAway: Int?
 )

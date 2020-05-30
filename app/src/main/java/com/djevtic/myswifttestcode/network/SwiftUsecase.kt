@@ -14,7 +14,7 @@ interface SwiftUsecase {
     fun getPlayerData(playerId : Int): Single<Response<PlayerDataModel>>
     fun getLeagueStanding(leagueId: Int): Single<Response<StandingResponseModelData>>
     fun getPlayersInTeam(teamId : Int, timePeriod : String): Single<Response<PlayersInTeamDataModel>>
-    fun getPlayersInSquad(squadId : Int, timePeriod : String): Single<Response<Any>>
+    fun getPlayersInSquad(squadId : Int, timePeriod : String): Single<Response<PlayersInTeamDataModel>>
 }
 
 class SwiftUsecaseImpl(val apiSwiftInterface: ApiSwiftInterface): SwiftUsecase {
@@ -34,7 +34,7 @@ class SwiftUsecaseImpl(val apiSwiftInterface: ApiSwiftInterface): SwiftUsecase {
         return apiSwiftInterface.getPlayersInTeam(teamId, timePeriod, BuildConfig.SWIFT_API_HOST, BuildConfig.SWIFT_API_KEY).ioToMain()
     }
 
-    override fun getPlayersInSquad(squadId: Int, timePeriod: String): Single<Response<Any>> {
+    override fun getPlayersInSquad(squadId: Int, timePeriod: String): Single<Response<PlayersInTeamDataModel>> {
         return apiSwiftInterface.getPlayersInTeam(squadId, timePeriod, BuildConfig.SWIFT_API_HOST, BuildConfig.SWIFT_API_KEY).ioToMain()
     }
 

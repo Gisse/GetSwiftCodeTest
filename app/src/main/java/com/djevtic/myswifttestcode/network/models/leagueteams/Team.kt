@@ -1,8 +1,11 @@
 package com.djevtic.myswifttestcode.network.models.leagueteams
 
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "team")
 data class Team(
     @SerializedName("code")
     val code: String,
@@ -17,6 +20,7 @@ data class Team(
     @SerializedName("name")
     val name: String,
     @SerializedName("team_id")
+    @PrimaryKey
     val teamId: Int,
     @SerializedName("venue_address")
     val venueAddress: String,

@@ -1,19 +1,21 @@
 package com.djevtic.myswifttestcode.network.models.standing
 
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 data class All(
     @SerializedName("draw")
-    val draw: Int,
+    val drawAll: Int?,
     @SerializedName("goalsAgainst")
-    val goalsAgainst: Int,
+    val goalsAgainstAll: Int?,
     @SerializedName("goalsFor")
-    val goalsFor: Int,
+    val goalsForAll: Int?,
     @SerializedName("lose")
-    val lose: Int,
+    val loseAll: Int?,
     @SerializedName("matchsPlayed")
-    val matchsPlayed: Int,
+    val matchsPlayedAll: Int?,
     @SerializedName("win")
-    val win: Int
+    val winAll: Int?
 )
