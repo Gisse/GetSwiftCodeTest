@@ -1,6 +1,5 @@
 package com.djevtic.myswifttestcode.network.models.standing
 
-
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey

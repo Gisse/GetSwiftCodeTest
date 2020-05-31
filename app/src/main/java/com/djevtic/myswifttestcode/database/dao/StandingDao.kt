@@ -14,11 +14,9 @@ interface StandingDao {
     fun loadAllByIds(teamIds: IntArray): Single<List<Standing>>
 
     @Query("SELECT dataUpdate FROM standing WHERE leagueId IN (:leagueId) LIMIT 1")
-    fun getLastUpdateTimestamp(leagueId: Int): Long
+    fun getLastUpdateTimestamp(leagueId: Int): Single<Long>
 
-    @Query(
-        "SELECT * FROM standing WHERE teamName LIKE :teamName LIMIT 1"
-    )
+    @Query("SELECT * FROM standing WHERE teamName LIKE :teamName LIMIT 1")
     fun findByName(teamName: String): Single<Standing>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

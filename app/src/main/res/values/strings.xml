@@ -1,3 +1,33 @@
 <resources>
+
+    <!-- STANDINGS VIEW HOLDER -->
     <string name="app_name">MySwiftTestCode</string>
+    <string name="position">Position</string>
+    <string name="points">Points</string>
+    <string name="goals">Goals</string>
+    <string name="won">Won</string>
+    <string name="lost">Lost</string>
+    <string name="played">Played</string>
+
+    <!-- STANDINGS FILTERING -->
+    <string name="filter_name">Name</string>
+    <string name="filter_played">Played</string>
+    <string name="filter_won">Won</string>
+    <string name="filter_lost">Lost</string>
+    <string name="filter_points">Points</string>
+    <string name="filter_position">Position</string>
+
+    <string-array name="someArray">
+        <item>TEST</item>
+        <item>SUPER</item>
+    </string-array>
+
+    <string-array name="standings_filter_array">
+        <item>@string/filter_name</item>
+        <item>@string/filter_played</item>
+        <item>@string/filter_won</item>
+        <item>@string/filter_lost</item>
+        <item>@string/filter_points</item>
+        <item>@string/filter_position</item>
+    </string-array>
 </resources>
