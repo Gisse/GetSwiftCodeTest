@@ -5,13 +5,13 @@ import com.google.gson.annotations.SerializedName
 
 data class Penalty(
     @SerializedName("commited")
-    val commited: Int,
+    val commitedPenalty: Int,
     @SerializedName("missed")
-    val missed: Int,
+    val missedPenalty: Int,
     @SerializedName("saved")
-    val saved: Int,
+    val savedPenalty: Int,
     @SerializedName("success")
-    val success: Int,
+    val successPenalty: Int,
     @SerializedName("won")
-    val won: Int
+    val wonPenalty: Int
 )

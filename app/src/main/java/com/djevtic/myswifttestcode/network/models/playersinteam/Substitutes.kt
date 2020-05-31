@@ -9,5 +9,5 @@ data class Substitutes(
     @SerializedName("in")
     val inX: Int,
     @SerializedName("out")
-    val `out`: Int
+    val out: Int
 )

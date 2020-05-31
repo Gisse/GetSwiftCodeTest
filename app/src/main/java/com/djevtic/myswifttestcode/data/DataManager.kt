@@ -1,44 +1,20 @@
 package com.djevtic.myswifttestcode.data
 
 import com.djevtic.myswifttestcode.App
-import com.djevtic.myswifttestcode.extensions.subscribeAsync
 import com.djevtic.myswifttestcode.network.ApiService
 import com.djevtic.myswifttestcode.network.ApiSwiftInterface
 import com.djevtic.myswifttestcode.network.SwiftUsecaseImpl
+import com.djevtic.myswifttestcode.network.models.playersinteam.Player
 import com.djevtic.myswifttestcode.network.models.standing.Standing
 import com.djevtic.myswifttestcode.utils.TimeUtils
-import io.reactivex.Observable
 import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Function
-import io.reactivex.schedulers.Schedulers
-
 
 object DataManager {
 
     private val swiftUsecase =
         SwiftUsecaseImpl(ApiService.getSwiftClient().create(ApiSwiftInterface::class.java))
 
-//    fun getStandingsData(leagueId: Int): Single<List<Standing>> {
-//        var database = App.getDatabase()
-//        var lastUpdateTime = 0L
-//        database.standingDao().getLastUpdateTimestamp(leagueId).flatMap {
-//            if (TimeUtils.didDayPassed(lastUpdateTime)) {
-//                return swiftUsecase.getLeagueStanding(it).map {
-//                    var standingList: MutableList<Standing> = ArrayList<Standing>()
-//                    it.body()?.api?.standings?.let { standing ->
-//                        standingList.addAll(standing[0])
-//                        database.standingDao().insertAll(standing[0])
-//                    }
-//                    return@map standingList
-//                }
-//            } else {
-//                return database.standingDao().getAll()
-//            }
-//        }
-//    }
-
-    fun getDataFromNetworkOrDatabase(leagueId: Int, lastUpdateTime: Long): Single<List<Standing>> {
+    private fun getStandingDataFromNetworkOrDatabase(leagueId: Int, lastUpdateTime: Long): Single<List<Standing>> {
         var database = App.getDatabase()
         if (TimeUtils.didDayPassed(lastUpdateTime)) {
             return swiftUsecase.getLeagueStanding(leagueId)
@@ -60,9 +36,48 @@ object DataManager {
         var database = App.getDatabase()
         return database.standingDao().getLastUpdateTimestamp(leagueId)
             .flatMap {
-                getDataFromNetworkOrDatabase(leagueId, it)
+                getStandingDataFromNetworkOrDatabase(leagueId, it)
             }.onErrorResumeNext {
-                getDataFromNetworkOrDatabase(leagueId, 0)
+                getStandingDataFromNetworkOrDatabase(leagueId, 0)
             }
+    }
+
+
+
+    fun getPlayersData(teamId: Int): Single<List<Player>> {
+        var database = App.getDatabase()
+        return database.playerDao().getPlayersLastUpdateTimestamp(teamId)
+            .flatMap {
+                getPlayersDataFromNetworkOrDatabase(teamId, it)
+            }.onErrorResumeNext {
+                getPlayersDataFromNetworkOrDatabase(teamId, 0)
+            }
+    }
+
+    private fun getPlayersDataFromNetworkOrDatabase(teamId: Int, lastUpdateTime: Long): Single<List<Player>> {
+        var database = App.getDatabase()
+        if (TimeUtils.didDayPassed(lastUpdateTime)) {
+            return swiftUsecase.getPlayersInTeam(teamId, "2018-2019")
+                .map {
+                    var playerList: List<Player> = arrayListOf()
+                    it.body()?.api?.players?.let { players ->
+                        playerList = prepareList(players.filter { it.league == "Premier League" })
+                    }
+                    return@map playerList
+                }.doOnSuccess {
+                    database.playerDao().insertAll(it)
+                }
+        } else {
+            return database.playerDao().getAllPlayersForTeam(teamId)
+        }
+    }
+
+    fun prepareList(players :List<Player>) : List<Player> {
+        var playerList : MutableList<Player> = mutableListOf()
+        playerList.addAll(players.filter { it.position == "Goalkeeper" })
+        playerList.addAll(players.filter { it.position == "Defender" })
+        playerList.addAll(players.filter { it.position == "Midfielder" })
+        playerList.addAll(players.filter { it.position == "Attacker" })
+        return playerList
     }
 }

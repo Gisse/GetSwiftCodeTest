@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class Passes(
     @SerializedName("accuracy")
-    val accuracy: Int,
+    val accuracyPasses: Int,
     @SerializedName("key")
-    val key: Int,
+    val keyPasses: Int,
     @SerializedName("total")
-    val total: Int
+    val totalPasses: Int
 )

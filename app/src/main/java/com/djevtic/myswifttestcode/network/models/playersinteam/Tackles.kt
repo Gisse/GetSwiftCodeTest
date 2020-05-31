@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class Tackles(
     @SerializedName("blocks")
-    val blocks: Int,
+    val blocksTackles: Int,
     @SerializedName("interceptions")
-    val interceptions: Int,
+    val interceptionsTackles: Int,
     @SerializedName("total")
-    val total: Int
+    val totalTackles: Int
 )

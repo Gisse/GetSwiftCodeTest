@@ -23,11 +23,11 @@
     </string-array>
 
     <string-array name="standings_filter_array">
+        <item>@string/filter_position</item>
         <item>@string/filter_name</item>
         <item>@string/filter_played</item>
         <item>@string/filter_won</item>
         <item>@string/filter_lost</item>
         <item>@string/filter_points</item>
-        <item>@string/filter_position</item>
     </string-array>
 </resources>

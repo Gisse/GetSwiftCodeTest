@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Shots(
     @SerializedName("on")
-    val on: Int,
+    val onShots: Int,
     @SerializedName("total")
-    val total: Int
+    val totalShots: Int
 )

@@ -2,13 +2,11 @@ package com.djevtic.myswifttestcode.presentation.league.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.ViewParent
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.djevtic.myswifttestcode.R
 import com.djevtic.myswifttestcode.network.models.standing.Standing
 
@@ -39,7 +37,7 @@ class StandingViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
     fun bind(
         standingData: Standing?,
-        callback: StandingPackageAdapter.OnStandingItemClickListener
+        callback: StandingAdapter.OnStandingItemClickListener
     ) {
         constLayout?.setOnClickListener {
             if (standingData != null) {

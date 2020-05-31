@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.djevtic.myswifttestcode.network.models.standing.Standing
 
-class StandingPackageAdapter (val onItemClickListener: OnStandingItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class StandingAdapter (val onItemClickListener: OnStandingItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     fun setDataSet(myDataset: List<Standing>?) {
         this.myDataset = myDataset
@@ -26,7 +26,6 @@ class StandingPackageAdapter (val onItemClickListener: OnStandingItemClickListen
         if (myDataset.isNullOrEmpty()) {
             return 0
         }
-        Log.d("djevtic", "AvailablePackageAdapter data size : ${myDataset?.size}")
         return myDataset?.size!!
     }
 

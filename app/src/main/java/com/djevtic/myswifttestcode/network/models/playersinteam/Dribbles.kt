@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Dribbles(
     @SerializedName("attempts")
-    val attempts: Int,
+    val attemptsDribbles: Int,
     @SerializedName("success")
-    val success: Int
+    val successDribbles: Int
 )

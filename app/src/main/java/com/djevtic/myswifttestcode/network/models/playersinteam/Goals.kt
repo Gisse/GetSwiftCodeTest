@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class Goals(
     @SerializedName("assists")
-    val assists: Int,
+    val assistsGoals: Int,
     @SerializedName("conceded")
-    val conceded: Int,
+    val concededGoals: Int,
     @SerializedName("total")
-    val total: Int
+    val totalGoals: Int
 )
