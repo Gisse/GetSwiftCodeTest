@@ -138,20 +138,7 @@ class MainActivity : BaseActivity(), StandingAdapter.OnStandingItemClickListener
             }
             ,
             {
-                //If no network let try to get from database even if data is old
-                disposable.add(
-                    DataManager.getStandingsFromDatabase(PREMIER_LEAGUE).ioToMain()
-                        .subscribe(
-                            {
-                                standingList = it
-                                prepareViewAndData()
-                            }
-                            ,
-                            {
-                                checkOverlayGroup.gone()
-                            }
-                        )
-                )
+                checkOverlayGroup.gone()
             }
         )
         )

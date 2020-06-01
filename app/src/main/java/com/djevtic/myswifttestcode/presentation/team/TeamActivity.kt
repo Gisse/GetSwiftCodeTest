@@ -85,16 +85,7 @@ class TeamActivity : BaseActivity(), TeamPlayersAdapter.OnPlayerItemClickListene
                     }
                     ,
                     {
-                        DataManager.getPlayersDataFromDatabase(team.teamId).ioToMain().subscribe(
-                            {
-                                playerList = DataManager.preparePlayerList(it)
-                                prepareViewAndData()
-                            }
-                        ,
-                            {
-                                progressOverlay.gone()
-                            }
-                        )
+                        progressOverlay.gone()
                     }
                 ))
         }
