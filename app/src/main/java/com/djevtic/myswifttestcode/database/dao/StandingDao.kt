@@ -7,7 +7,7 @@ import io.reactivex.Single
 
 @Dao
 interface StandingDao {
-    @Query("SELECT * FROM standing")
+    @Query("SELECT * FROM standing ORDER BY rank")
     fun getAll(): Single<List<Standing>>
 
     @Query("SELECT * FROM standing WHERE teamId IN (:teamIds)")

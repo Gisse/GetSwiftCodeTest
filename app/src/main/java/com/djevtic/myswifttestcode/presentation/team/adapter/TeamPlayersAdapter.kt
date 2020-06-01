@@ -38,6 +38,7 @@ class TeamPlayersAdapter (val onItemClickListener: OnPlayerItemClickListener) : 
 
     interface OnPlayerItemClickListener {
         fun playerClicked(item: Player)
+        fun playerLongClicked(item: Player)
     }
 
 }

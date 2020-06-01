@@ -20,6 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentation.team.TeamActivity" />
+        <activity android:name=".presentation.player.PlayerInfoActivity" />
+        <activity android:name=".presentation.comparison.PlayerComparisonActivity" />
     </application>
 
 </manifest>

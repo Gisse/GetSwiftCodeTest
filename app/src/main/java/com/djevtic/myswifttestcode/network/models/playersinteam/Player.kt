@@ -11,11 +11,11 @@ data class Player(
     @SerializedName("age")
     val age: Int,
     @SerializedName("birth_country")
-    val birthCountry: String,
+    val birthCountry: String?,
     @SerializedName("birth_date")
     val birthDate: String,
     @SerializedName("birth_place")
-    val birthPlace: String,
+    val birthPlace: String?,
     @SerializedName("captain")
     val captain: Int,
     @SerializedName("cards")
@@ -28,7 +28,7 @@ data class Player(
     @Embedded
     val duels: Duels,
     @SerializedName("firstname")
-    val firstname: String,
+    val firstname: String?,
     @SerializedName("fouls")
     @Embedded
     val fouls: Fouls,
@@ -39,17 +39,17 @@ data class Player(
     @Embedded
     val goals: Goals,
     @SerializedName("height")
-    val height: String,
+    val height: String?,
     @SerializedName("injured")
-    val injured: String,
+    val injured: String?,
     @SerializedName("lastname")
-    val lastname: String,
+    val lastname: String?,
     @SerializedName("league")
     val league: String,
     @SerializedName("nationality")
-    val nationality: String,
+    val nationality: String?,
     @SerializedName("number")
-    val number: String,
+    val number: String?,
     @SerializedName("passes")
     @Embedded
     val passes: Passes,
@@ -60,13 +60,13 @@ data class Player(
     @SerializedName("player_id")
     val playerId: Int,
     @SerializedName("player_name")
-    val playerName: String,
+    val playerName: String?,
     @SerializedName("position")
     val position: String,
     @SerializedName("rating")
-    val rating: String,
+    val rating: String?,
     @SerializedName("season")
-    val season: String,
+    val season: String?,
     @SerializedName("shots")
     @Embedded
     val shots: Shots,
@@ -79,8 +79,9 @@ data class Player(
     @SerializedName("team_id")
     val teamId: Int,
     @SerializedName("team_name")
-    val teamName: String,
+    val teamName: String?,
     @SerializedName("weight")
-    val weight: String,
-    var dataUpdate : Long?
+    val weight: String?,
+    var dataUpdate : Long?,
+    var selected : Boolean
 )

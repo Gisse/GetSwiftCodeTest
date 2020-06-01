@@ -13,6 +13,9 @@ import com.djevtic.myswifttestcode.data.DataManager
 import com.djevtic.myswifttestcode.extensions.gone
 import com.djevtic.myswifttestcode.extensions.ioToMain
 import com.djevtic.myswifttestcode.extensions.visible
+import com.djevtic.myswifttestcode.network.ApiService
+import com.djevtic.myswifttestcode.network.ApiSwiftInterface
+import com.djevtic.myswifttestcode.network.SwiftUsecaseImpl
 import com.djevtic.myswifttestcode.network.models.standing.Standing
 import com.djevtic.myswifttestcode.presentation.league.adapter.StandingAdapter
 import com.djevtic.myswifttestcode.presentation.team.TeamActivity
@@ -22,7 +25,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : BaseActivity(), StandingAdapter.OnStandingItemClickListener {
 
     companion object {
-        const val TEAM : String = "team"
+        const val TEAM: String = "team"
+        const val PLAYER: String = "player"
+        const val PLAYER2: String = "player2"
+        const val PREMIER_LEAGUE = 524
     }
 
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
@@ -30,6 +36,9 @@ class MainActivity : BaseActivity(), StandingAdapter.OnStandingItemClickListener
     private lateinit var spinnerAdapter: ArrayAdapter<CharSequence>
 
     private var standingList: List<Standing> = listOf()
+
+    private val swiftUsecase =
+        SwiftUsecaseImpl(ApiService.getSwiftClient().create(ApiSwiftInterface::class.java))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,13 +121,9 @@ class MainActivity : BaseActivity(), StandingAdapter.OnStandingItemClickListener
         viewAdapter = StandingAdapter(this)
         (viewAdapter as StandingAdapter).setDataSet(standingList)
         leagueRecycleView.apply {
-            // use this setting to improve performance if you know that changes
-            // in content do not change the layout size of the RecyclerView
             setHasFixedSize(true)
-            // use a linear layout manager
             viewManager = LinearLayoutManager(context)
             layoutManager = viewManager
-            // specify an viewAdapter (see also next example)
             adapter = viewAdapter
         }
         checkOverlayGroup.gone()
@@ -126,22 +131,35 @@ class MainActivity : BaseActivity(), StandingAdapter.OnStandingItemClickListener
 
     private fun getData() {
         checkOverlayGroup.visible()
-        disposable.add(DataManager.getStandingsData(524).ioToMain().subscribe(
+        disposable.add(DataManager.getStandingsData(PREMIER_LEAGUE).ioToMain().subscribe(
             {
                 standingList = it
                 prepareViewAndData()
             }
             ,
             {
-                Log.d("djevtic", "Trowable $it")
-                checkOverlayGroup.gone()
+                //If no network let try to get from database even if data is old
+                disposable.add(
+                    DataManager.getStandingsFromDatabase(PREMIER_LEAGUE).ioToMain()
+                        .subscribe(
+                            {
+                                standingList = it
+                                prepareViewAndData()
+                            }
+                            ,
+                            {
+                                checkOverlayGroup.gone()
+                            }
+                        )
+                )
             }
-        ))
+        )
+        )
     }
 
     override fun teamClicked(item: Standing) {
-        Serializer.serialize(item)
         val mBundle = Bundle()
+        //Serialized JSON object and send as string
         mBundle.putString(TEAM, Serializer.serialize(item))
         val intent = Intent(this, TeamActivity::class.java)
         intent.putExtras(mBundle)

@@ -1,5 +1,6 @@
 package com.djevtic.myswifttestcode.presentation.team.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -27,14 +28,26 @@ class PlayersViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         playerData: Player?,
         callback: TeamPlayersAdapter.OnPlayerItemClickListener
     ) {
-        constLayout?.setOnClickListener {
-            if (playerData != null) {
-                callback.playerClicked(playerData)
+        if(playerData != null) {
+            if (playerData.selected) {
+                constLayout?.setBackgroundColor(Color.DKGRAY)
+            } else {
+                constLayout?.setBackgroundColor(Color.WHITE)
             }
+            constLayout?.setOnClickListener {
+                if (playerData != null) {
+                    callback.playerClicked(playerData)
+                }
+            }
+            constLayout?.setOnLongClickListener {
+                if (playerData != null) {
+                    callback.playerLongClicked(playerData)
+                }
+                true
+            }
+            playerName?.text = "${playerData.firstname} ${playerData.lastname}"
+            playerPosition?.text = playerData.position
+            playerPlayed?.text = playerData.games.appearencesGames.toString()
         }
-        playerName?.text = "${playerData?.firstname} ${playerData?.lastname}"
-        playerPosition?.text = playerData?.position
-        playerPlayed?.text = playerData?.games?.appearencesGames.toString()
     }
-
 }

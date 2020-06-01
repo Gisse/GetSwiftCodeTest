@@ -17,10 +17,33 @@
     <string name="filter_points">Points</string>
     <string name="filter_position">Position</string>
 
-    <string-array name="someArray">
-        <item>TEST</item>
-        <item>SUPER</item>
-    </string-array>
+    <!-- COMPARISON STRINGS -->
+    <string name="name_comparison">Name</string>
+    <string name="position_comparison">Position</string>
+    <string name="years_comparison">Years</string>
+    <string name="games_played_comparison">Games played</string>
+    <string name="yellow_card_comparison">Yellow cards</string>
+    <string name="red_card_comparison">Red cards</string>
+    <string name="goals_comparison">Goals</string>
+    <string name="assistans_comparison">Assists</string>
+    <string name="drible_success_comparison">Dribble Success</string>
+    <string name="shot_total_comparison">Shot total</string>
+    <string name="shot_on_comparison">Shot on</string>
+    <string name="dribble_total_comparison">Dribble total</string>
+    <string name="passes_total_comparison">Passes Total</string>
+    <string name="passes_key_comparison">Passes Key</string>
+    <string name="dribble_attemts_comparison">Dribble Attempts</string>
+    <string name="tackles_total_comparison">Tackles Total</string>
+    <string name="blocks_comparison">Blocks</string>
+    <string name="interception_comparison">Interceptions</string>
+    <string name="duel_total_comparison">Duel Total</string>
+    <string name="duel_won_comparison">Duel Won</string>
+    <string name="foul_commited_comparison">Foul Committed</string>
+    <string name="player_name">Player Name</string>
+
+    <!-- TOASTS -->
+    <string name="toast_comparison_goalkeeper">Unable to compare Goalkeepers</string>
+    <string name="toast_comparison_position">You have to compare %1$s with %2$s</string>
 
     <string-array name="standings_filter_array">
         <item>@string/filter_position</item>
