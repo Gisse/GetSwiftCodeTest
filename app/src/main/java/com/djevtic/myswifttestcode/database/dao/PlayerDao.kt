@@ -2,10 +2,8 @@ package com.djevtic.myswifttestcode.database.dao
 
 import androidx.room.*
 import com.djevtic.myswifttestcode.network.models.playersinteam.Player
-import com.djevtic.myswifttestcode.network.models.standing.Standing
 import io.reactivex.Completable
 import io.reactivex.Single
-
 
 @Dao
 interface PlayerDao {

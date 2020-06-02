@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.djevtic.myswifttestcode.presentation.comparison.adapter.models.PlayerComparisonDataViewHolder
 import com.djevtic.myswifttestcode.presentation.comparison.adapter.models.PlayerData
 
-class PlayerComparisonAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PlayerComparisonAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         const val WIN = 0
@@ -45,7 +45,7 @@ class PlayerComparisonAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>(
         if (myDataset.isNullOrEmpty()) {
             return 0
         }
-        return myDataset.size!!
+        return myDataset.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -53,9 +53,9 @@ class PlayerComparisonAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>(
             (holder as PlayersSemaforeViewHolder).bind(null)
         } else {
             if (holder is PlayersSemaforeViewHolder) {
-                (holder as PlayersSemaforeViewHolder).bind(myDataset[position])
-            } else if (holder is PlayerComparisonDataViewHolder){
-                (holder as PlayerComparisonDataViewHolder).bind(myDataset[position])
+                holder.bind(myDataset[position])
+            } else if (holder is PlayerComparisonDataViewHolder) {
+                holder.bind(myDataset[position])
             }
         }
     }

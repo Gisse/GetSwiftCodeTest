@@ -11,10 +11,6 @@ object Serializer {
         return gson.toJson(model)
     }
 
-    fun serialize(model: Any, objectType: TypeFactory.ObjectType): String {
-        return gson.toJson(model, typeFactory.getType(objectType))
-    }
-
     fun <T> deserialize(string: String, objectType: TypeFactory.ObjectType): T {
         return gson.fromJson(string, typeFactory.getType(objectType)) as T
     }

@@ -1,12 +1,12 @@
 package com.djevtic.myswifttestcode.presentation.league.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.djevtic.myswifttestcode.network.models.standing.Standing
 
-class StandingAdapter (val onItemClickListener: OnStandingItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class StandingAdapter(private val onItemClickListener: OnStandingItemClickListener) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     fun setDataSet(myDataset: List<Standing>?) {
         this.myDataset = myDataset
@@ -40,5 +40,4 @@ class StandingAdapter (val onItemClickListener: OnStandingItemClickListener) : R
     interface OnStandingItemClickListener {
         fun teamClicked(item: Standing)
     }
-
 }

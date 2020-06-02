@@ -20,8 +20,8 @@ interface StandingDao {
     fun findByName(teamName: String): Single<Standing>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(standing: List<Standing>):Completable
+    fun insertAll(standing: List<Standing>): Completable
 
     @Delete
-    fun delete(standing: Standing):Completable
+    fun delete(standing: Standing): Completable
 }

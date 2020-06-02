@@ -7,13 +7,16 @@
 
     <TextView
         android:id="@+id/playerName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:text=""
         android:textColor="@android:color/black"
         android:textSize="24sp"
+        android:gravity="start"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,7 +36,6 @@
         android:id="@+id/playerPosition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:text=""
         android:textColor="@android:color/darker_gray"
@@ -42,13 +44,12 @@
         app:layout_constraintTop_toBottomOf="@id/playerPositionLabel" />
 
 
-
     <TextView
         android:id="@+id/playerPlayedLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Played"
+        android:text="@string/played"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="parent"

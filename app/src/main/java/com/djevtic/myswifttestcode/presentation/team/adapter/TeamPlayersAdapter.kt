@@ -5,14 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.djevtic.myswifttestcode.network.models.playersinteam.Player
 
-class TeamPlayersAdapter (val onItemClickListener: OnPlayerItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TeamPlayersAdapter (private val onItemClickListener: OnPlayerItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     fun setDataSet(myDataset: List<Player>?) {
         this.myDataset = myDataset
     }
 
     private var myDataset: List<Player>? = listOf()
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return PlayersViewHolder(
@@ -40,5 +39,4 @@ class TeamPlayersAdapter (val onItemClickListener: OnPlayerItemClickListener) : 
         fun playerClicked(item: Player)
         fun playerLongClicked(item: Player)
     }
-
 }

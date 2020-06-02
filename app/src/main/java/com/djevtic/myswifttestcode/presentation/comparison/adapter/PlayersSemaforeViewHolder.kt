@@ -10,7 +10,13 @@ import com.djevtic.myswifttestcode.R
 import com.djevtic.myswifttestcode.presentation.comparison.adapter.models.PlayerData
 
 class PlayersSemaforeViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
-    RecyclerView.ViewHolder(inflater.inflate(R.layout.player_comparison_semafore_view_holder, parent, false)) {
+    RecyclerView.ViewHolder(
+        inflater.inflate(
+            R.layout.player_comparison_semafore_view_holder,
+            parent,
+            false
+        )
+    ) {
 
     private var player1marker: View? = null
     private var player2marker: View? = null
@@ -27,14 +33,14 @@ class PlayersSemaforeViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     fun bind(
         playerData: PlayerData?
     ) {
-        if(playerData != null) {
-            if(playerData.playerOne) {
+        if (playerData != null) {
+            if (playerData.playerOne) {
                 player1marker?.setBackgroundColor(Color.GREEN)
                 player2marker?.setBackgroundColor(Color.RED)
                 player1text?.text = player1text?.context?.resources?.getString(R.string.won)
                 player2text?.text = player2text?.context?.resources?.getString(R.string.lost)
             }
-            if(playerData.playerTwo) {
+            if (playerData.playerTwo) {
                 player2marker?.setBackgroundColor(Color.GREEN)
                 player1marker?.setBackgroundColor(Color.RED)
                 player1text?.text = player1text?.context?.resources?.getString(R.string.lost)

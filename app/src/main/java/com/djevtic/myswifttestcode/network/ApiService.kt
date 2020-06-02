@@ -12,7 +12,7 @@ object ApiService {
 
     private var retrofit: Retrofit? = null
 
-    fun getSwiftClient() : Retrofit {
+    fun getSwiftClient(): Retrofit {
         return getClient(BuildConfig.SWIFT_SERVER)
     }
 

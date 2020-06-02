@@ -40,13 +40,4 @@ interface ApiSwiftInterface {
         @Header("x-rapidapi-host") host: String,
         @Header("x-rapidapi-key") apiKey: String
     ): Single<Response<PlayersInTeamDataModel>>
-
-    @GET("v2/players/squad/{squad_id}/{time_period}")
-    fun getPlayersInSquad(
-        @Path("squad_id") squadId: Int,
-        @Path("time_period") timePeriod: String,
-        @Header("x-rapidapi-host") host: String,
-        @Header("x-rapidapi-key") apiKey: String
-    ): Single<Response<Any>>
-
 }

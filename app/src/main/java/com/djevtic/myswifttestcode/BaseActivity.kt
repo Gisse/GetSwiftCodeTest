@@ -7,8 +7,6 @@ open class BaseActivity: AppCompatActivity() {
 
     protected val disposable = CompositeDisposable()
 
-    var isInForeground = false
-
     override fun onDestroy() {
         super.onDestroy()
         disposable.dispose()

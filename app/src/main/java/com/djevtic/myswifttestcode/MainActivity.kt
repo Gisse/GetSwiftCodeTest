@@ -2,7 +2,6 @@ package com.djevtic.myswifttestcode
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -13,9 +12,6 @@ import com.djevtic.myswifttestcode.data.DataManager
 import com.djevtic.myswifttestcode.extensions.gone
 import com.djevtic.myswifttestcode.extensions.ioToMain
 import com.djevtic.myswifttestcode.extensions.visible
-import com.djevtic.myswifttestcode.network.ApiService
-import com.djevtic.myswifttestcode.network.ApiSwiftInterface
-import com.djevtic.myswifttestcode.network.SwiftUsecaseImpl
 import com.djevtic.myswifttestcode.network.models.standing.Standing
 import com.djevtic.myswifttestcode.presentation.league.adapter.StandingAdapter
 import com.djevtic.myswifttestcode.presentation.team.TeamActivity
@@ -36,9 +32,6 @@ class MainActivity : BaseActivity(), StandingAdapter.OnStandingItemClickListener
     private lateinit var spinnerAdapter: ArrayAdapter<CharSequence>
 
     private var standingList: List<Standing> = listOf()
-
-    private val swiftUsecase =
-        SwiftUsecaseImpl(ApiService.getSwiftClient().create(ApiSwiftInterface::class.java))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -126,6 +119,7 @@ class MainActivity : BaseActivity(), StandingAdapter.OnStandingItemClickListener
             layoutManager = viewManager
             adapter = viewAdapter
         }
+        listVisible()
         checkOverlayGroup.gone()
     }
 
@@ -139,6 +133,7 @@ class MainActivity : BaseActivity(), StandingAdapter.OnStandingItemClickListener
             ,
             {
                 checkOverlayGroup.gone()
+                listVisible()
             }
         )
         )
@@ -151,5 +146,15 @@ class MainActivity : BaseActivity(), StandingAdapter.OnStandingItemClickListener
         val intent = Intent(this, TeamActivity::class.java)
         intent.putExtras(mBundle)
         startActivity(intent)
+    }
+
+    private fun listVisible() {
+        if (standingList.isNotEmpty()) {
+            emptyText.gone()
+            leagueRecycleView.visible()
+        } else {
+            emptyText.visible()
+            leagueRecycleView.gone()
+        }
     }
 }

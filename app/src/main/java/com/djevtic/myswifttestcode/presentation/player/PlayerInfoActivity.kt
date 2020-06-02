@@ -21,7 +21,7 @@ class PlayerInfoActivity : BaseActivity() {
         val playerData = intent.getStringExtra(MainActivity.PLAYER)
         if(playerData != null){
             //Deserialized string to JSON object
-            var player = Serializer.deserialize<Player>(playerData, TypeFactory.ObjectType.PLAYER)
+            val player = Serializer.deserialize<Player>(playerData, TypeFactory.ObjectType.PLAYER)
             playerName.text = "${player.firstname} ${player.lastname}"
             playerPosition.text = player.position
             playerPlayed.text = player.games.appearencesGames.toString()

@@ -44,6 +44,8 @@
     <!-- TOASTS -->
     <string name="toast_comparison_goalkeeper">Unable to compare Goalkeepers</string>
     <string name="toast_comparison_position">You have to compare %1$s with %2$s</string>
+    <string name="empty_list_text">Unable to obtain data from network or local database</string>
+    <string name="empty_list_team_text">Unable to obtain data from network or local database or no players in Premier League for season</string>
 
     <string-array name="standings_filter_array">
         <item>@string/filter_position</item>

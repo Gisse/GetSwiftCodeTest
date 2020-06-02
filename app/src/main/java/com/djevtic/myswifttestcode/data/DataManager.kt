@@ -23,16 +23,16 @@ object DataManager {
         leagueId: Int,
         lastUpdateTime: Long
     ): Single<List<Standing>> {
-        var database = App.getDatabase()
+        val database = App.getDatabase()
         if (TimeUtils.didDayPassed(lastUpdateTime)) {
             return swiftUsecase.getLeagueStanding(leagueId)
-                .map {
+                .map { response ->
                     var standingList: List<Standing> = arrayListOf()
-                    it.body()?.api?.standings?.let { standing ->
+                    response.body()?.api?.standings?.let { standing ->
                         standingList = standing[0]
                         database.standingDao().insertAll(standingList).ioToMain().subscribe()
                     }
-                    var time = System.currentTimeMillis()
+                    val time = System.currentTimeMillis()
                     standingList.forEach {
                         it.dataUpdate = time
                         it.leagueId = leagueId
@@ -47,7 +47,7 @@ object DataManager {
     }
 
     fun getStandingsData(leagueId: Int): Single<List<Standing>> {
-        var database = App.getDatabase()
+        val database = App.getDatabase()
         return database.standingDao().getLastUpdateTimestamp(leagueId)
             .flatMap {
                 getStandingDataFromNetworkOrDatabase(leagueId, it)
@@ -58,7 +58,7 @@ object DataManager {
 
 
     fun getPlayersData(teamId: Int): Single<List<Player>> {
-        var database = App.getDatabase()
+        val database = App.getDatabase()
         return database.playerDao().getPlayersLastUpdateTimestamp(teamId)
             .flatMap {
                 getPlayersDataFromNetworkOrDatabase(teamId, it)
@@ -71,12 +71,12 @@ object DataManager {
         teamId: Int,
         lastUpdateTime: Long
     ): Single<List<Player>> {
-        var database = App.getDatabase()
+        val database = App.getDatabase()
         if (TimeUtils.didDayPassed(lastUpdateTime)) {
             return swiftUsecase.getPlayersInTeam(teamId, "2018-2019")
-                .map {
+                .map { response ->
                     var playerList: List<Player> = arrayListOf()
-                    it.body()?.api?.players?.let { players ->
+                    response.body()?.api?.players?.let { players ->
                         playerList =
                             preparePlayerList(players.filter { it.league == "Premier League" })
                         database.playerDao().insertAll(playerList).ioToMain().subscribe()
@@ -99,7 +99,7 @@ object DataManager {
      * Prepare list of players in team in required order
      */
     fun preparePlayerList(players: List<Player>): List<Player> {
-        var playerList: MutableList<Player> = mutableListOf()
+        val playerList: MutableList<Player> = mutableListOf()
         playerList.addAll(players.filter { it.position == GOALKEEPER })
         playerList.addAll(players.filter { it.position == DEFENDER })
         playerList.addAll(players.filter { it.position == MIDFIELDER })

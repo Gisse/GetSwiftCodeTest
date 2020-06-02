@@ -55,13 +55,14 @@ class TeamActivity : BaseActivity(), TeamPlayersAdapter.OnPlayerItemClickListene
         val teamData = intent.getStringExtra(TEAM)
         if(teamData != null){
             //Deserialized string to JSON object
-            team = Serializer.deserialize<Standing>(teamData, TypeFactory.ObjectType.TEAM)
+            team = Serializer.deserialize(teamData, TypeFactory.ObjectType.TEAM)
             teamName?.text = team.teamName
             teamImage?.let {
                 Glide.with(it.context)
                     .load(team.logo)
                     .override(600, 600)
                     .centerCrop()
+                    .error(R.mipmap.ic_launcher_round)
                     .into(it)
             }
 
@@ -86,6 +87,7 @@ class TeamActivity : BaseActivity(), TeamPlayersAdapter.OnPlayerItemClickListene
                     ,
                     {
                         progressOverlay.gone()
+                        listVisible()
                     }
                 ))
         }
@@ -101,6 +103,7 @@ class TeamActivity : BaseActivity(), TeamPlayersAdapter.OnPlayerItemClickListene
             adapter = viewAdapter
         }
         progressOverlay.gone()
+        listVisible()
     }
 
     override fun playerClicked(item: Player) {
@@ -116,13 +119,13 @@ class TeamActivity : BaseActivity(), TeamPlayersAdapter.OnPlayerItemClickListene
         if(item.position != GOALKEEPER){
             if(selectedPlayerList.isEmpty()) {
                 selectedPlayerList.add(item)
-                var index = playerList.indexOf(item)
+                val index = playerList.indexOf(item)
                 playerList[index].selected = true
                 (viewAdapter as TeamPlayersAdapter).setDataSet(playerList)
                 viewAdapter.notifyItemChanged(index)
             } else {
                 if(selectedPlayerList.contains(item)){
-                    var index = playerList.indexOf(item)
+                    val index = playerList.indexOf(item)
                     playerList[index].selected = false
                     (viewAdapter as TeamPlayersAdapter).setDataSet(playerList)
                     viewAdapter.notifyItemChanged(index)
@@ -148,4 +151,13 @@ class TeamActivity : BaseActivity(), TeamPlayersAdapter.OnPlayerItemClickListene
         }
     }
 
+    private fun listVisible() {
+        if (playerList.isNotEmpty()) {
+            emptyText.gone()
+            teamRecycleView.visible()
+        } else {
+            emptyText.visible()
+            teamRecycleView.gone()
+        }
+    }
 }

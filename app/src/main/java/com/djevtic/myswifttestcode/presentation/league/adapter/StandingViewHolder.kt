@@ -50,6 +50,7 @@ class StandingViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
                 .load(standingData?.logo)
                 .override(600, 600)
                 .centerCrop()
+                .error(R.mipmap.ic_launcher_round)
                 .into(it)
         }
 
